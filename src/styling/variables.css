@@ -1,0 +1,123 @@
+@import url("https://fonts.googleapis.com/css2?family=Audiowide&family=Baumans&display=swap");
+
+:root {
+  /* ---- Colors ---- */
+  --color-red: #e53935;
+  --color-black: #181818;
+  --color-gray: #bdbdbd;
+  --color-white: #ffffff;
+
+  /* Accents & Highlights */
+  --accent-red: #ff1744;
+  --accent-gray: #757575;
+  --accent-black: #222;
+  --accent-white: #f5f5f5;
+
+  --highlight-red: #ff8a80;
+  --highlight-gray: #e0e0e0;
+  --highlight-black: #333;
+  --highlight-white: #fafafa;
+
+  /* Font Colors */
+  --font-primary: var(--color-black);
+  --font-secondary: var(--accent-gray);
+  --font-on-red: var(--color-white);
+  --font-on-black: var(--color-white);
+  --font-on-gray: var(--color-black);
+  --font-on-white: var(--color-black);
+
+  /* Gradients */
+  --gradient-red-black: linear-gradient(
+    90deg,
+    var(--color-red) 0%,
+    var(--color-black) 100%
+  );
+  --gradient-gray-white: linear-gradient(
+    90deg,
+    var(--color-gray) 0%,
+    var(--color-white) 100%
+  );
+  --gradient-black-gray: linear-gradient(
+    90deg,
+    var(--color-black) 0%,
+    var(--color-gray) 100%
+  );
+  --gradient-red-white: linear-gradient(
+    90deg,
+    var(--color-red) 0%,
+    var(--color-white) 100%
+  );
+
+  /* Shadows */
+  --shadow-red: 0 2px 8px 0 rgba(229, 57, 53, 0.12);
+  --shadow-black: 0 2px 8px 0 rgba(24, 24, 24, 0.12);
+  --shadow-gray: 0 2px 8px 0 rgba(189, 189, 189, 0.12);
+
+  /* Borders */
+  --border-gray: 1px solid var(--color-gray);
+  --border-red: 1px solid var(--color-red);
+
+  /* ---- Font System ---- */
+
+  --font-audiowide: "Audiowide", cursive, Arial, sans-serif;
+  --font-baumans: "Baumans", cursive, Arial, sans-serif;
+  --font-inter: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+  --font-family-primary: var(--font-inter);
+  --font-family-heading: var(--font-audiowide);
+  --font-family-accent: var(--font-baumans);
+
+  /* ---- Typography System ---- */
+  --font-size-xxs: 0.6rem;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.25rem;
+  --font-size-xl: 1.5rem;
+  --font-size-2xl: 2rem;
+  --font-size-3xl: 2.5rem;
+  --font-size-4xl: 3.5rem;
+
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+
+  --line-height-tight: 1.1;
+  --line-height-normal: 1.5;
+  --line-height-loose: 1.8;
+
+  --letter-spacing-tight: -0.03em;
+  --letter-spacing-normal: 0em;
+  --letter-spacing-wide: 0.05em;
+
+  /* ---- Spacing System ---- */
+  --space-xxs: 2px;
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 40px;
+  --space-2xl: 64px;
+  --space-3xl: 128px;
+
+  /* ---- Layout ---- */
+  --border-radius-sm: 4px;
+  --border-radius-md: 8px;
+  --border-radius-lg: 16px;
+
+  --container-max-width: 1200px;
+  --container-padding: var(--space-lg);
+
+  /* ---- Buttons ---- */
+  --button-bg: var(--color-black);
+  --button-bg-hover: var(--accent-black);
+  --button-color: var(--color-white);
+  --button-border: var(--border-gray);
+  --button-highlight: var(--highlight-red);
+
+  /* ---- Inputs ---- */
+  --input-bg: var(--color-white);
+  --input-border: var(--border-gray);
+  --input-focus: var(--accent-red);
+}
