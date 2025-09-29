@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+
+// Video by Ron Lach : https://www.pexels.com/video/close-up-video-of-a-person-dialing-telephone-10397452/
+import heroBGVideo from "https://www.pexels.com/video/close-up-video-of-a-person-dialing-telephone-10397452/";
 import {
   Phone,
   Mail,

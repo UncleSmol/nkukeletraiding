@@ -14,6 +14,10 @@ import {
   Calendar,
 } from "lucide-react";
 
+// Video by Kindel Media: https://www.pexels.com/video/man-people-woman-desk-7687999/
+const heroBGVideo =
+  "https://player.vimeo.com/external/7687999.sd.mp4?s=87bd6fd4c7e1cdbebd3e2a61e2e8c4c3d8ce4bda&profile_id=164&oauth2_token_id=57447761";
+
 const pageVariants = {
   initial: { opacity: 0, y: 20 },
   in: { opacity: 1, y: 0 },
@@ -117,14 +121,27 @@ const Info = () => {
 
   return (
     <motion.div
-      className="min-h-[calc(100vh-60px)] pt-[60px] bg-gray-50"
+      className="relative min-h-[calc(100vh-60px)] pt-[60px] bg-gray-50 overflow-hidden"
       initial="initial"
       animate="in"
       exit="out"
       variants={pageVariants}
       transition={{ duration: 0.5 }}
     >
-      <div className="max-w-[1200px] mx-auto px-4 py-8">
+      {/* Background Video - always behind content */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute top-0 left-0 w-full h-full object-cover z-0 opacity-30"
+        src={heroBGVideo}
+      />
+
+      {/* Overlay for darkness, better text contrast */}
+      <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-40 z-0" />
+
+      <div className="relative z-10 max-w-[1200px] mx-auto px-4 py-8">
         {/* Header Section */}
         <motion.div
           className="text-center mb-12"
@@ -135,7 +152,7 @@ const Info = () => {
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-black">
             About Nkukele Trading & Projects
           </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-700 max-w-3xl mx-auto">
             A leading South African company providing comprehensive sanitation,
             construction, and industrial services with certified excellence.
           </p>
@@ -150,7 +167,7 @@ const Info = () => {
           {/* Company Overview */}
           <motion.section
             variants={itemVariants}
-            className="bg-white rounded-xl p-8 shadow-lg"
+            className="bg-white rounded-xl p-8 shadow-lg bg-opacity-95"
           >
             <h2 className="text-3xl font-bold mb-6 text-black flex items-center gap-3">
               <Building className="w-8 h-8 text-red-500" />
@@ -204,7 +221,7 @@ const Info = () => {
             variants={itemVariants}
             className="grid md:grid-cols-2 gap-8"
           >
-            <div className="bg-red-500 text-white rounded-xl p-8 shadow-lg">
+            <div className="bg-red-500 text-white rounded-xl p-8 shadow-lg bg-opacity-95">
               <h2 className="text-2xl font-bold mb-4 flex items-center gap-3">
                 <Target className="w-7 h-7" />
                 Our Vision
@@ -215,7 +232,7 @@ const Info = () => {
               </p>
             </div>
 
-            <div className="bg-black text-white rounded-xl p-8 shadow-lg">
+            <div className="bg-black text-white rounded-xl p-8 shadow-lg bg-opacity-95">
               <h2 className="text-2xl font-bold mb-4 flex items-center gap-3">
                 <Target className="w-7 h-7 text-red-500" />
                 Our Mission
@@ -231,7 +248,7 @@ const Info = () => {
           {/* Core Values */}
           <motion.section
             variants={itemVariants}
-            className="bg-white rounded-xl p-8 shadow-lg"
+            className="bg-white rounded-xl p-8 shadow-lg bg-opacity-95"
           >
             <h2 className="text-3xl font-bold mb-8 text-black text-center">
               Our Core Values
@@ -240,7 +257,7 @@ const Info = () => {
               {coreValues.map((value, index) => (
                 <motion.div
                   key={value.title}
-                  className="bg-gray-50 rounded-lg p-6 text-center border border-gray-200 hover:shadow-md transition-shadow"
+                  className="bg-gray-50 rounded-lg p-6 text-center border border-gray-200 hover:shadow-md transition-shadow bg-opacity-95"
                   whileHover={{ scale: 1.02 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
@@ -259,14 +276,17 @@ const Info = () => {
           {/* Leadership Team */}
           <motion.section
             variants={itemVariants}
-            className="bg-white rounded-xl p-8 shadow-lg"
+            className="bg-white rounded-xl p-8 shadow-lg bg-opacity-95"
           >
             <h2 className="text-3xl font-bold mb-8 text-black text-center">
               Leadership Team
             </h2>
             <div className="grid md:grid-cols-2 gap-8">
               {leadership.map((person, index) => (
-                <div key={person.name} className="bg-gray-50 rounded-lg p-6">
+                <div
+                  key={person.name}
+                  className="bg-gray-50 rounded-lg p-6 bg-opacity-95"
+                >
                   <h3 className="text-2xl font-bold mb-2 text-black">
                     {person.name}
                   </h3>
@@ -316,14 +336,14 @@ const Info = () => {
           {/* Contact Information */}
           <motion.section
             variants={itemVariants}
-            className="bg-black text-white rounded-xl p-8 shadow-lg"
+            className="bg-gradient-to-r from-red-600 to-red-800 text-white rounded-xl p-8 shadow-lg bg-opacity-95"
           >
             <h2 className="text-3xl font-bold mb-6 text-center">
               Contact Information
             </h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               <div className="flex items-center gap-3">
-                <MapPin className="w-6 h-6 text-red-500" />
+                <MapPin className="w-6 h-6 text-black-500" />
                 <div>
                   <p className="font-semibold">Address</p>
                   <p className="text-gray-300">{companyInfo.address}</p>
@@ -331,7 +351,7 @@ const Info = () => {
               </div>
 
               <div className="flex items-center gap-3">
-                <Phone className="w-6 h-6 text-red-500" />
+                <Phone className="w-6 h-6 text-black-500" />
                 <div>
                   <p className="font-semibold">Phone</p>
                   {companyInfo.phone.map((number, index) => (
@@ -343,7 +363,7 @@ const Info = () => {
               </div>
 
               <div className="flex items-center gap-3">
-                <Mail className="w-6 h-6 text-red-500" />
+                <Mail className="w-6 h-6 text-black-500" />
                 <div>
                   <p className="font-semibold">Email</p>
                   <p className="text-gray-300">{companyInfo.email}</p>
@@ -351,7 +371,7 @@ const Info = () => {
               </div>
 
               <div className="flex items-center gap-3">
-                <Calendar className="w-6 h-6 text-red-500" />
+                <Calendar className="w-6 h-6 text-black-500" />
                 <div>
                   <p className="font-semibold">Operating Hours</p>
                   <p className="text-gray-300">{companyInfo.hours}</p>
@@ -359,7 +379,7 @@ const Info = () => {
               </div>
 
               <div className="flex items-center gap-3">
-                <Award className="w-6 h-6 text-red-500" />
+                <Award className="w-6 h-6 text-black-500" />
                 <div>
                   <p className="font-semibold">Registration</p>
                   <p className="text-gray-300">{companyInfo.registration}</p>
@@ -367,7 +387,7 @@ const Info = () => {
               </div>
 
               <div className="flex items-center gap-3">
-                <Shield className="w-6 h-6 text-red-500" />
+                <Shield className="w-6 h-6 text-black-500" />
                 <div>
                   <p className="font-semibold">VAT Number</p>
                   <p className="text-gray-300">{companyInfo.vat}</p>

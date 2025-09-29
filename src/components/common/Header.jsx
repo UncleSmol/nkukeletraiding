@@ -4,7 +4,14 @@ import { motion, AnimatePresence } from "framer-motion";
 import MobileLogo from "../../assets/mobileLogo.jpeg";
 import DesktopLogo from "../../assets/mobileLogo.jpeg";
 import DevDocSig from "../../devsig/dev-doc-logo.svg";
-import { Home, Info, Layers, Phone, Award } from "lucide-react";
+import {
+  Home,
+  Info,
+  Layers,
+  Phone,
+  Award,
+  GalleryVerticalEnd,
+} from "lucide-react";
 
 const navItems = [
   { name: "Homepage", icon: <Home size={22} />, href: "/" },
@@ -16,6 +23,7 @@ const navItems = [
     icon: <Award size={22} />,
     href: "/accreditations",
   },
+  { name: "Gallery", icon: <GalleryVerticalEnd size={22} />, href: "/gallery" },
 ];
 
 const headerVariants = {

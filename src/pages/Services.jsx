@@ -7,18 +7,24 @@ import {
   Wrench,
   HardHat,
   Car,
-  Trash2,
-  Users,
-  Home,
   Factory,
+  Home,
   School,
   Calendar,
+  Users,
   CheckCircle,
   Shield,
   Clock,
   Award,
-  Droplets,
 } from "lucide-react";
+
+// Import images from assets
+import mobileToilet1 from "../assets/mobileToiletServices1.jpeg";
+import mobileToilet2 from "../assets/mobileToiletServices2.jpeg";
+import mobileToilet3 from "../assets/mobileToiletServices3.jpeg";
+import mobileToilet4 from "../assets/mobileToiletServices4.jpeg";
+import miningEquipment from "../assets/miningAndEquipmentHire.jpeg";
+import transportation from "../assets/transportationServices.jpeg";
 
 const pageVariants = {
   initial: { opacity: 0, y: 20 },
@@ -58,7 +64,7 @@ const Services = () => {
         "Emergency sanitation support",
         "On-site sanitation management",
       ],
-      image: "/api/placeholder/400/300?text=Mobile+Toilets",
+      images: [mobileToilet1, mobileToilet2, mobileToilet3, mobileToilet4],
       color: "bg-blue-50 border-blue-200",
     },
     {
@@ -73,7 +79,7 @@ const Services = () => {
         "Concrete work & civil construction",
         "Renovations & tiling",
       ],
-      image: "/api/placeholder/400/300?text=Construction",
+      images: [mobileToilet2], // Using construction-related image as placeholder
       color: "bg-orange-50 border-orange-200",
     },
     {
@@ -88,7 +94,7 @@ const Services = () => {
         "Deep cleaning services",
         "Once-off contract cleaning",
       ],
-      image: "/api/placeholder/400/300?text=Cleaning",
+      images: [mobileToilet3], // Using cleaning-related image as placeholder
       color: "bg-green-50 border-green-200",
     },
     {
@@ -103,7 +109,7 @@ const Services = () => {
         "Mobile toilet maintenance for sites",
         "Waste removal services",
       ],
-      image: "/api/placeholder/400/300?text=Mining+Supplies",
+      images: [miningEquipment],
       color: "bg-purple-50 border-purple-200",
     },
     {
@@ -118,7 +124,7 @@ const Services = () => {
         "Nationwide logistics",
         "Timely delivery guaranteed",
       ],
-      image: "/api/placeholder/400/300?text=Transportation",
+      images: [transportation],
       color: "bg-red-50 border-red-200",
     },
     {
@@ -133,7 +139,7 @@ const Services = () => {
         "Remote location solutions",
         "Custom accommodation plans",
       ],
-      image: "/api/placeholder/400/300?text=Accommodation",
+      images: [mobileToilet4], // Using accommodation-related image as placeholder
       color: "bg-teal-50 border-teal-200",
     },
   ];
@@ -288,8 +294,13 @@ const Services = () => {
                     </ul>
                   </div>
                   <div className="flex items-center justify-center">
-                    <div className="w-full h-64 bg-gray-300 rounded-lg flex items-center justify-center">
-                      <span className="text-gray-500">Service Image</span>
+                    <div className="w-full h-64 rounded-lg overflow-hidden shadow-lg">
+                      <img
+                        src={service.images[0]}
+                        alt={service.title}
+                        className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+                        loading="lazy"
+                      />
                     </div>
                   </div>
                 </motion.div>
