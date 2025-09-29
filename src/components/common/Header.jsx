@@ -13,6 +13,7 @@ import {
   GalleryVerticalEnd,
 } from "lucide-react";
 
+// Custom media query: '976px' breakpoint (use 'max-[976px]' for mobile, 'min-[977px]' for desktop)
 const navItems = [
   { name: "Homepage", icon: <Home size={22} />, href: "/" },
   { name: "Info", icon: <Info size={22} />, href: "/info" },
@@ -50,7 +51,7 @@ const Hamburger = ({ open, toggle }) => (
     onClick={toggle}
     type="button"
     aria-label={open ? "Close menu" : "Open menu"}
-    className="md:hidden flex flex-col justify-between w-10 h-10 p-2 relative z-50"
+    className="block min-[977px]:hidden flex flex-col justify-between w-10 h-10 p-2 relative z-50"
   >
     <motion.span
       className="block h-1 w-full bg-red-500 rounded"
@@ -83,13 +84,22 @@ const Header = () => {
     return () => document.removeEventListener("click", handleClick);
   }, []);
 
+  // Close menu on resize to desktop
+  useEffect(() => {
+    if (!menuOpen) return;
+    const handleResize = () => {
+      if (window.innerWidth >= 977) setMenuOpen(false);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [menuOpen]);
+
   const handleNav = (href) => {
     navigate(href);
     setMenuOpen(false);
   };
 
   const handleMenuToggle = (e) => {
-    // Prevent the global click listener from immediately closing the menu
     e.stopPropagation();
     setMenuOpen((prev) => !prev);
   };
@@ -108,18 +118,18 @@ const Header = () => {
             <img
               src={MobileLogo}
               alt="Mobile Logo"
-              className="h-10 w-10 block md:hidden rounded-md object-contain"
+              className=" w-16 block min-[977px]:hidden rounded-md object-contain"
             />
             <img
               src={DesktopLogo}
               alt="Desktop Logo"
-              className="h-12 w-12 hidden md:block rounded-lg object-contain"
+              className="w-16 hidden min-[977px]:block rounded-lg object-contain"
             />
           </NavLink>
         </div>
 
-        {/* Desktop Navigation */}
-        <ul className="hidden md:flex gap-8 items-center font-medium text-lg h-full">
+        {/* Desktop Navigation - visible at >=977px */}
+        <ul className="hidden min-[977px]:flex gap-8 items-center font-medium text-lg h-full">
           {navItems.map((item) => (
             <li key={item.name} className="h-full flex items-center">
               <NavLink
@@ -133,16 +143,20 @@ const Header = () => {
                 }
                 end={item.href === "/"}
               >
+                {/* Icon hidden on desktop */}
+                <span className="inline-block min-[977px]:hidden">
+                  {item.icon}
+                </span>
                 {item.name}
               </NavLink>
             </li>
           ))}
         </ul>
 
-        {/* Hamburger Button */}
+        {/* Hamburger Button - visible below 977px */}
         <Hamburger open={menuOpen} toggle={handleMenuToggle} />
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu - visible below 977px */}
         <AnimatePresence>
           {menuOpen && (
             <motion.div

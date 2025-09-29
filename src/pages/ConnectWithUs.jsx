@@ -1,8 +1,5 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-
-// Video by Ron Lach : https://www.pexels.com/video/close-up-video-of-a-person-dialing-telephone-10397452/
-import heroBGVideo from "https://www.pexels.com/video/close-up-video-of-a-person-dialing-telephone-10397452/";
 import {
   Phone,
   Mail,
@@ -18,6 +15,10 @@ import {
   Award,
 } from "lucide-react";
 
+// Import the local video file (after downloading it)
+import heroBGVideo from "../assets/contact-video.mp4"; // Adjust path as needed
+
+// Animation Variants
 const pageVariants = {
   initial: { opacity: 0, y: 20 },
   in: { opacity: 1, y: 0 },
@@ -53,6 +54,14 @@ const ConnectWithUs = () => {
     message: "",
   });
 
+  // Add video reference and state
+  const videoRef = React.useRef(null);
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
+
+  const handleVideoLoad = () => {
+    setIsVideoLoaded(true);
+  };
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -62,7 +71,6 @@ const ConnectWithUs = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission here
     console.log("Form submitted:", formData);
     alert("Thank you for your message! We'll get back to you soon.");
     setFormData({
@@ -149,14 +157,34 @@ const ConnectWithUs = () => {
 
   return (
     <motion.div
-      className="min-h-[calc(100vh-60px)] pt-[60px] bg-gray-50"
+      className="min-h-[calc(100vh-60px)] pt-[60px] relative overflow-hidden"
       initial="initial"
       animate="in"
       exit="out"
       variants={pageVariants}
       transition={{ duration: 0.5 }}
     >
-      <div className="max-w-[1200px] mx-auto px-4 py-8">
+      {/* Video Background */}
+      <div className="absolute inset-0 z-0">
+        <video
+          ref={videoRef}
+          autoPlay
+          muted
+          loop
+          playsInline
+          onLoadedData={handleVideoLoad}
+          className="w-full h-full object-cover"
+          poster="../assets/transportationServices.jpeg" // Fallback image
+        >
+          <source src={heroBGVideo} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        {/* Overlay for better text readability */}
+        <div className="absolute inset-0 bg-black/50"></div>
+      </div>
+
+      {/* Content */}
+      <div className="relative z-10 max-w-[1200px] mx-auto px-4 py-8">
         {/* Header Section */}
         <motion.div
           className="text-center mb-12"
@@ -164,10 +192,10 @@ const ConnectWithUs = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-black">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
             Connect With Us
           </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-200 max-w-3xl mx-auto">
             Ready to discuss your project? Get in touch with our team for
             professional solutions and certified service excellence.
           </p>
@@ -179,13 +207,13 @@ const ConnectWithUs = () => {
           animate="visible"
           className="space-y-12"
         >
-          {/* Quick Stats */}
+          {/* Quick Stats - Updated for better visibility over video */}
           <motion.section variants={itemVariants}>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
               {quickStats.map((stat, index) => (
                 <div
                   key={stat.label}
-                  className="bg-white rounded-lg p-6 text-center shadow-lg"
+                  className="bg-white/90 backdrop-blur-sm rounded-lg p-6 text-center shadow-lg border border-white/20"
                 >
                   <div className="text-red-500 mb-2 flex justify-center">
                     {stat.icon}
@@ -193,20 +221,20 @@ const ConnectWithUs = () => {
                   <div className="text-2xl font-bold text-black mb-1">
                     {stat.value}
                   </div>
-                  <div className="text-gray-600 text-sm">{stat.label}</div>
+                  <div className="text-gray-700 text-sm">{stat.label}</div>
                 </div>
               ))}
             </div>
           </motion.section>
 
-          {/* Contact Methods & Form */}
+          {/* Contact Methods & Form - Updated for better visibility */}
           <motion.section
             variants={itemVariants}
             className="grid lg:grid-cols-2 gap-8"
           >
             {/* Contact Information */}
             <div className="space-y-6">
-              <h2 className="text-3xl font-bold text-black mb-6">
+              <h2 className="text-3xl font-bold text-white mb-6">
                 Get In Touch
               </h2>
 
@@ -214,7 +242,7 @@ const ConnectWithUs = () => {
                 {contactInfo.map((contact, index) => (
                   <motion.div
                     key={contact.title}
-                    className="bg-white rounded-lg p-6 shadow-lg border-l-4 border-red-500"
+                    className="bg-white/90 backdrop-blur-sm rounded-lg p-6 shadow-lg border-l-4 border-red-500"
                     whileHover={{ scale: 1.02 }}
                     transition={{ type: "spring", stiffness: 300 }}
                   >
@@ -229,7 +257,7 @@ const ConnectWithUs = () => {
                           {contact.title}
                         </h3>
                         {contact.details.map((detail, idx) => (
-                          <p key={idx} className="text-gray-600">
+                          <p key={idx} className="text-gray-700">
                             {detail}
                           </p>
                         ))}
@@ -249,10 +277,10 @@ const ConnectWithUs = () => {
             </div>
 
             {/* Contact Form */}
-            <div className="bg-white rounded-xl p-8 shadow-lg">
+            <div className="bg-white/90 backdrop-blur-sm rounded-xl p-8 shadow-lg border border-white/20">
               <div className="flex items-center gap-3 mb-6">
                 <MessageCircle className="w-8 h-8 text-red-500" />
-                <h2 className="text-3xl font-bold text-black">
+                <h2 className="text-3xl font-bold text-gray-900">
                   Send us a Message
                 </h2>
               </div>
@@ -372,7 +400,7 @@ const ConnectWithUs = () => {
 
           {/* Emergency Contact Banner */}
           <motion.section variants={itemVariants}>
-            <div className="bg-gradient-to-r from-red-600 to-red-700 text-white rounded-xl p-8 text-center">
+            <div className="bg-gradient-to-r from-red-600 to-red-700 text-white rounded-xl p-8 text-center backdrop-blur-sm">
               <h2 className="text-2xl font-bold mb-4">
                 Emergency Service Available
               </h2>
@@ -396,15 +424,15 @@ const ConnectWithUs = () => {
 
           {/* Map Placeholder */}
           <motion.section variants={itemVariants}>
-            <div className="bg-white rounded-xl p-8 shadow-lg">
-              <h2 className="text-3xl font-bold mb-6 text-black text-center">
+            <div className="bg-white/90 backdrop-blur-sm rounded-xl p-8 shadow-lg border border-white/20">
+              <h2 className="text-3xl font-bold mb-6 text-gray-900 text-center">
                 Find Us in Witbank
               </h2>
               <div className="bg-gray-200 rounded-lg h-64 flex items-center justify-center">
                 <div className="text-center">
                   <MapPin className="w-12 h-12 text-red-500 mx-auto mb-4" />
-                  <p className="text-gray-600 mb-2">21 Visagie Street EXT8</p>
-                  <p className="text-gray-600">Klipfontein, Witbank, 1034</p>
+                  <p className="text-gray-700 mb-2">21 Visagie Street EXT8</p>
+                  <p className="text-gray-700">Klipfontein, Witbank, 1034</p>
                   <a
                     href="https://maps.google.com"
                     target="_blank"
