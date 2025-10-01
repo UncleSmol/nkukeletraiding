@@ -14,6 +14,7 @@ import Gallery from "./pages/Gallery";
 import ConnectWithUs from "./pages/ConnectWithUs";
 import Accreditatons from "./pages/Accreditatons";
 import Info from "./pages/Info";
+import PageNotFound from "./components/PageNotFound";
 
 // Scroll to top on route change
 const ScrollToTop = () => {
@@ -37,6 +38,8 @@ const App = () => {
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/connect" element={<ConnectWithUs />} />
           <Route path="/accreditations" element={<Accreditatons />} />
+          {/* Catch-all route for 404s */}
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </main>
       <Footer />
