@@ -277,7 +277,7 @@ const ConnectWithUs = () => {
             </div>
 
             {/* Contact Form */}
-            <div className="bg-white/90 backdrop-blur-sm rounded-xl p-8 shadow-lg border border-white/20">
+            {/* <div className="bg-white/90 backdrop-blur-sm rounded-xl p-8 shadow-lg border border-white/20">
               <div className="flex items-center gap-3 mb-6">
                 <MessageCircle className="w-8 h-8 text-red-500" />
                 <h2 className="text-3xl font-bold text-gray-900">
@@ -395,7 +395,7 @@ const ConnectWithUs = () => {
                   Send Message
                 </button>
               </form>
-            </div>
+            </div> */}
           </motion.section>
 
           {/* Emergency Contact Banner */}
